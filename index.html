@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokédex - Primera Generación</title>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="cerrar" onclick="cerrarModal()">&times;</span>
+
+    <img id="modal-img">
+    <h2 id="modal-nombre"></h2>
+    <p id="modal-numero"></p>
+    <p id="modal-tipo"></p>
+    <p id="modal-desc"></p>
+  </div>
+</div>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h1>Pokédex</h1>
+    <p>Explora por generaciones</p>
+
+    <nav>
+      <ul class="menu">
+        <li><button onclick="cargarGeneracion(1, event)">Gen 1</button></li>
+        <li><button onclick="cargarGeneracion(2, event)">Gen 2</button></li>
+        <li><button onclick="cargarGeneracion(3, event)">Gen 3</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="leyenda">
+    <button class="tipo-box reset" data-tipo="todos">Todos</button>
+    <button class="tipo-box" data-tipo="Fuego">Fuego</button>
+    <button class="tipo-box" data-tipo="Agua">Agua</button>
+    <button class="tipo-box" data-tipo="Planta">Planta</button>
+    <button class="tipo-box" data-tipo="Eléctrico">Eléctrico</button>
+    <button class="tipo-box" data-tipo="Veneno">Veneno</button>
+    <button class="tipo-box" data-tipo="Normal">Normal</button>
+    <button class="tipo-box" data-tipo="Tierra">Tierra</button>
+    <button class="tipo-box" data-tipo="Roca">Roca</button>
+    <button class="tipo-box" data-tipo="Bicho">Bicho</button>
+    <button class="tipo-box" data-tipo="Hada">Hada</button>
+    <button class="tipo-box" data-tipo="Psíquico">Psíquico</button>
+    <button class="tipo-box" data-tipo="Lucha">Lucha</button>
+    <button class="tipo-box" data-tipo="Volador">Volador</button>
+    <button class="tipo-box" data-tipo="Hielo">Hielo</button>
+    <button class="tipo-box" data-tipo="Dragón">Dragón</button>
+    <button class="tipo-box" data-tipo="Fantasma">Fantasma</button>
+    <button class="tipo-box" data-tipo="Acero">Acero</button>
+  </div>
+
+  <!-- CONTENIDO -->
+  <main>
+    <section class="pokedex" id="pokedex"></section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Proyecto personal de Pokédex</p>
+    <p>Hecho por Antonio 🇪🇸</p>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    const pokedex = document.getElementById("pokedex");
+
+    const generaciones = {
+
+      // ✅ GEN 1 (1–151)
+      1: {
+        inicio: 1,
+        nombres: [
+          "Bulbasaur","Ivysaur","Venusaur","Charmander","Charmeleon","Charizard",
+          "Squirtle","Wartortle","Blastoise","Caterpie","Metapod","Butterfree",
+          "Weedle","Kakuna","Beedrill","Pidgey","Pidgeotto","Pidgeot",
+          "Rattata","Raticate","Spearow","Fearow","Ekans","Arbok",
+          "Pikachu","Raichu","Sandshrew","Sandslash","Nidoran♀","Nidorina","Nidoqueen",
+          "Nidoran♂","Nidorino","Nidoking","Clefairy","Clefable",
+          "Vulpix","Ninetales","Jigglypuff","Wigglytuff","Zubat","Golbat",
+          "Oddish","Gloom","Vileplume","Paras","Parasect","Venonat","Venomoth",
+          "Diglett","Dugtrio","Meowth","Persian","Psyduck","Golduck",
+          "Mankey","Primeape","Growlithe","Arcanine","Poliwag","Poliwhirl","Poliwrath",
+          "Abra","Kadabra","Alakazam","Machop","Machoke","Machamp",
+          "Bellsprout","Weepinbell","Victreebel","Tentacool","Tentacruel",
+          "Geodude","Graveler","Golem","Ponyta","Rapidash","Slowpoke","Slowbro",
+          "Magnemite","Magneton","Farfetch'd","Doduo","Dodrio","Seel","Dewgong",
+          "Grimer","Muk","Shellder","Cloyster","Gastly","Haunter","Gengar",
+          "Onix","Drowzee","Hypno","Krabby","Kingler","Voltorb","Electrode",
+          "Exeggcute","Exeggutor","Cubone","Marowak","Hitmonlee","Hitmonchan",
+          "Lickitung","Koffing","Weezing","Rhyhorn","Rhydon","Chansey",
+          "Tangela","Kangaskhan","Horsea","Seadra","Goldeen","Seaking",
+          "Staryu","Starmie","Mr. Mime","Scyther","Jynx","Electabuzz","Magmar",
+          "Pinsir","Tauros","Magikarp","Gyarados","Lapras","Ditto","Eevee",
+          "Vaporeon","Jolteon","Flareon","Porygon","Omanyte","Omastar",
+          "Kabuto","Kabutops","Aerodactyl","Snorlax","Articuno","Zapdos",
+          "Moltres","Dratini","Dragonair","Dragonite","Mewtwo","Mew"
+        ]
+      },
+
+      // ✅ GEN 2 (152–251)
+      2: {
+        inicio: 152,
+        nombres: [
+          "Chikorita","Bayleef","Meganium","Cyndaquil","Quilava","Typhlosion",
+          "Totodile","Croconaw","Feraligatr","Sentret","Furret",
+          "Hoothoot","Noctowl","Ledyba","Ledian","Spinarak","Ariados",
+          "Crobat","Chinchou","Lanturn","Pichu","Cleffa","Igglybuff",
+          "Togepi","Togetic","Natu","Xatu","Mareep","Flaaffy","Ampharos",
+          "Bellossom","Marill","Azumarill","Sudowoodo","Politoed",
+          "Hoppip","Skiploom","Jumpluff","Aipom","Sunkern","Sunflora",
+          "Yanma","Wooper","Quagsire","Espeon","Umbreon","Murkrow",
+          "Slowking","Misdreavus","Unown","Wobbuffet","Girafarig",
+          "Pineco","Forretress","Dunsparce","Gligar","Steelix",
+          "Snubbull","Granbull","Qwilfish","Scizor","Shuckle","Heracross",
+          "Sneasel","Teddiursa","Ursaring","Slugma","Magcargo",
+          "Swinub","Piloswine","Corsola","Remoraid","Octillery",
+          "Delibird","Mantine","Skarmory","Houndour","Houndoom",
+          "Kingdra","Phanpy","Donphan","Porygon2","Stantler","Smeargle",
+          "Tyrogue","Hitmontop","Smoochum","Elekid","Magby",
+          "Miltank","Blissey","Raikou","Entei","Suicune",
+          "Larvitar","Pupitar","Tyranitar","Lugia","Ho-Oh","Celebi"
+        ]
+      },
+
+      // ✅ GEN 3 (252–386)
+      3: {
+        inicio: 252,
+        nombres: [
+          "Treecko","Grovyle","Sceptile","Torchic","Combusken","Blaziken",
+          "Mudkip","Marshtomp","Swampert","Poochyena","Mightyena",
+          "Zigzagoon","Linoone","Wurmple","Silcoon","Beautifly",
+          "Cascoon","Dustox","Lotad","Lombre","Ludicolo",
+          "Seedot","Nuzleaf","Shiftry","Taillow","Swellow",
+          "Wingull","Pelipper","Ralts","Kirlia","Gardevoir",
+          "Surskit","Masquerain","Shroomish","Breloom","Slakoth",
+          "Vigoroth","Slaking","Nincada","Ninjask","Shedinja",
+          "Whismur","Loudred","Exploud","Makuhita","Hariyama",
+          "Azurill","Nosepass","Skitty","Delcatty","Sableye",
+          "Mawile","Aron","Lairon","Aggron","Meditite","Medicham",
+          "Electrike","Manectric","Plusle","Minun","Volbeat","Illumise",
+          "Roselia","Gulpin","Swalot","Carvanha","Sharpedo",
+          "Wailmer","Wailord","Numel","Camerupt","Torkoal",
+          "Spoink","Grumpig","Spinda","Trapinch","Vibrava","Flygon",
+          "Cacnea","Cacturne","Swablu","Altaria","Zangoose",
+          "Seviper","Lunatone","Solrock","Barboach","Whiscash",
+          "Corphish","Crawdaunt","Baltoy","Claydol","Lileep","Cradily",
+          "Anorith","Armaldo","Feebas","Milotic","Castform",
+          "Kecleon","Shuppet","Banette","Duskull","Dusclops",
+          "Tropius","Chimecho","Absol","Wynaut","Snorunt",
+          "Glalie","Spheal","Sealeo","Walrein","Clamperl",
+          "Huntail","Gorebyss","Relicanth","Luvdisc","Bagon",
+          "Shelgon","Salamence","Beldum","Metang","Metagross",
+          "Regirock","Regice","Registeel","Latias","Latios",
+          "Kyogre","Groudon","Rayquaza","Jirachi","Deoxys"
+        ]
+      }
+    };
+
+    const infoPokemon = {
+      "001": { tipo: "Planta / Veneno", descripcion: "Un bulbo crece en su espalda desde pequeño." },
+      "002": { tipo: "Planta / Veneno", descripcion: "Su bulbo se desarrolla al absorber energía solar." },
+      "003": { tipo: "Planta / Veneno", descripcion: "La flor florece al captar mucha energía." },
+      "004": { tipo: "Fuego", descripcion: "La llama de su cola refleja su estado vital." },
+      "005": { tipo: "Fuego", descripcion: "Más agresivo, su llama es más intensa." },
+      "006": { tipo: "Fuego / Volador", descripcion: "Escupe fuego capaz de fundir roca." },
+      "007": { tipo: "Agua", descripcion: "Se protege dentro de su caparazón." },
+      "008": { tipo: "Agua", descripcion: "Ataca con potentes chorros de agua." },
+      "009": { tipo: "Agua", descripcion: "Sus cañones disparan agua a presión." },
+      "010": { tipo: "Bicho", descripcion: "Su único propósito es evolucionar." },
+      "011": { tipo: "Bicho", descripcion: "Permanece inmóvil mientras evoluciona." },
+      "012": { tipo: "Bicho / Volador", descripcion: "Sus alas dispersan polvo tóxico." },
+      "013": { tipo: "Bicho / Veneno", descripcion: "Se defiende con una picadura venenosa." },
+      "014": { tipo: "Bicho / Veneno", descripcion: "Espera evolucionar sin moverse." },
+      "015": { tipo: "Bicho / Veneno", descripcion: "Muy agresivo, ataca con sus aguijones." },
+      "016": { tipo: "Normal / Volador", descripcion: "Muy común en bosques y campos." },
+      "017": { tipo: "Normal / Volador", descripcion: "Protege ferozmente su territorio." },
+      "018": { tipo: "Normal / Volador", descripcion: "Gran velocidad en vuelo." },
+      "019": { tipo: "Normal", descripcion: "Roedor silencioso y muy ágil." },
+      "020": { tipo: "Normal", descripcion: "Sus colmillos pueden atravesar metal." },
+      "021": { tipo: "Normal / Volador", descripcion: "Ataca con su pico afilado." },
+      "022": { tipo: "Normal / Volador", descripcion: "Vuela a gran velocidad." },
+      "023": { tipo: "Veneno", descripcion: "Detecta presas con su lengua." },
+      "024": { tipo: "Veneno", descripcion: "Hipnotiza con su mirada." },
+      "025": { tipo: "Eléctrico", descripcion: "Almacena electricidad en sus mejillas." },
+      "026": { tipo: "Eléctrico", descripcion: "Descarga electricidad acumulada." },
+      "027": { tipo: "Tierra", descripcion: "Se enrolla para protegerse." },
+      "028": { tipo: "Tierra", descripcion: "Excava túneles veloces." },
+      "029": { tipo: "Veneno", descripcion: "Tranquilo y tímido." },
+      "030": { tipo: "Veneno", descripcion: "Más agresivo que su preevolución." },
+      "031": { tipo: "Veneno / Tierra", descripcion: "Feroz protectora de su familia." },
+      "032": { tipo: "Veneno", descripcion: "Usa sus cuernos para luchar." },
+      "033": { tipo: "Veneno", descripcion: "Combate con gran agresividad." },
+      "034": { tipo: "Veneno / Tierra", descripcion: "Muy poderoso y territorial." },
+      "035": { tipo: "Hada", descripcion: "Su apariencia es adorable." },
+      "036": { tipo: "Hada", descripcion: "Absorbe luz lunar." },
+      "037": { tipo: "Fuego", descripcion: "Posee varias colas pequeñas." },
+      "038": { tipo: "Fuego", descripcion: "Elegante y majestuoso." },
+      "039": { tipo: "Normal / Hada", descripcion: "Canta canciones hipnóticas." },
+      "040": { tipo: "Normal / Hada", descripcion: "Gran capacidad pulmonar." },
+      "041": { tipo: "Veneno / Volador", descripcion: "Emite ultrasonidos." },
+      "042": { tipo: "Veneno / Volador", descripcion: "Bebe sangre de sus víctimas." },
+      "043": { tipo: "Planta / Veneno", descripcion: "Se mueve con la luz solar." },
+      "044": { tipo: "Planta / Veneno", descripcion: "Produce fragancias desagradables." },
+      "045": { tipo: "Planta / Veneno", descripcion: "Libera polen venenoso." },
+      "046": { tipo: "Bicho / Planta", descripcion: "Se entierra para absorber nutrientes." },
+      "047": { tipo: "Bicho / Planta", descripcion: "Controla esporas venenosas." },
+      "048": { tipo: "Bicho / Veneno", descripcion: "Tiene grandes ojos compuestos." },
+      "049": { tipo: "Bicho / Veneno", descripcion: "Vuela de noche atraído por la luz." },
+      "050": { tipo: "Tierra", descripcion: "Excava túneles rápidamente." },
+      "051": { tipo: "Tierra", descripcion: "Forma montículos de tierra." },
+      "052": { tipo: "Normal", descripcion: "Ama las monedas brillantes." },
+      "053": { tipo: "Normal", descripcion: "Ágil y elegante." },
+      "054": { tipo: "Agua", descripcion: "Sufre constantes dolores de cabeza." },
+      "055": { tipo: "Agua", descripcion: "Cuando duele, libera poder." },
+      "056": { tipo: "Lucha", descripcion: "Siempre busca peleas." },
+      "057": { tipo: "Lucha", descripcion: "Muy agresivo." },
+      "058": { tipo: "Fuego", descripcion: "Valiente y leal." },
+      "059": { tipo: "Fuego", descripcion: "Corre a gran velocidad." },
+      "060": { tipo: "Agua", descripcion: "Su piel es flexible." },
+      "061": { tipo: "Agua", descripcion: "Aprende nuevos ataques." },
+      "062": { tipo: "Agua / Lucha", descripcion: "Gran nadador." },
+      "063": { tipo: "Psíquico", descripcion: "Usa telepatía." },
+      "064": { tipo: "Psíquico", descripcion: "Usa cucharas como foco." },
+      "065": { tipo: "Psíquico", descripcion: "Gran inteligencia." },
+      "066": { tipo: "Lucha", descripcion: "Entrena constantemente." },
+      "067": { tipo: "Lucha", descripcion: "Gran fuerza física." },
+      "068": { tipo: "Lucha", descripcion: "Tiene cuatro brazos." },
+      "069": { tipo: "Planta / Veneno", descripcion: "Atrae presas con su olor." },
+      "070": { tipo: "Planta / Veneno", descripcion: "Muy voraz." },
+      "071": { tipo: "Planta / Veneno", descripcion: "Traga presas enteras." },
+      "072": { tipo: "Agua / Veneno", descripcion: "Flota libremente usando sus tentáculos venenosos." },
+      "073": { tipo: "Agua / Veneno", descripcion: "Sus tentáculos pueden paralizar a sus presas." },
+      "074": { tipo: "Roca / Tierra", descripcion: "Tiene un cuerpo duro como la roca." },
+      "075": { tipo: "Roca / Tierra", descripcion: "Camina lentamente pero con gran fuerza." },
+      "076": { tipo: "Roca / Tierra", descripcion: "Capaz de provocar terremotos al rodar." },
+      "077": { tipo: "Fuego", descripcion: "Corre veloz como el viento." },
+      "078": { tipo: "Fuego", descripcion: "Su velocidad alcanza niveles increíbles." },
+      "079": { tipo: "Agua / Psíquico", descripcion: "Siempre parece distraído." },
+      "080": { tipo: "Agua / Psíquico", descripcion: "Se vuelve inteligente al evolucionar." },
+      "081": { tipo: "Eléctrico / Acero", descripcion: "Genera electricidad continuamente." },
+      "082": { tipo: "Eléctrico / Acero", descripcion: "Controla campos magnéticos." },
+      "083": { tipo: "Normal / Volador", descripcion: "Usa su tallo como arma." },
+      "084": { tipo: "Normal / Volador", descripcion: "Dos cabezas mejor que una." },
+      "085": { tipo: "Normal / Volador", descripcion: "Tres cabezas para atacar." },
+      "086": { tipo: "Agua", descripcion: "Prefiere aguas frías." },
+      "087": { tipo: "Agua / Hielo", descripcion: "Se adapta al frío extremo." },
+      "088": { tipo: "Veneno", descripcion: "Se alimenta de desechos." },
+      "089": { tipo: "Veneno", descripcion: "Muy contaminante e inestable." },
+      "090": { tipo: "Agua", descripcion: "Tiene una concha muy dura." },
+      "091": { tipo: "Agua / Hielo", descripcion: "Sus púas son extremadamente peligrosas." },
+      "092": { tipo: "Fantasma / Veneno", descripcion: "Aparece en lugares oscuros." },
+      "093": { tipo: "Fantasma / Veneno", descripcion: "Acecha a sus víctimas." },
+      "094": { tipo: "Fantasma / Veneno", descripcion: "Arrastra a las personas a otra dimensión." },
+      "095": { tipo: "Roca / Tierra", descripcion: "Excava túneles bajo tierra." },
+      "096": { tipo: "Psíquico", descripcion: "Usa la hipnosis para dormir a sus rivales." },
+      "097": { tipo: "Psíquico", descripcion: "Gran poder mental." },
+      "098": { tipo: "Agua", descripcion: "Golpea con gran fuerza." },
+      "099": { tipo: "Agua", descripcion: "Muy fuerte físicamente." },
+      "100": { tipo: "Eléctrico", descripcion: "Puede explotar con facilidad." },
+      "101": { tipo: "Eléctrico", descripcion: "Explota con gran potencia." },
+      "102": { tipo: "Planta / Psíquico", descripcion: "Se asemeja a huevos." },
+      "103": { tipo: "Planta / Psíquico", descripcion: "Tiene múltiples cabezas." },
+      "104": { tipo: "Tierra", descripcion: "Lleva un cráneo como casco." },
+      "105": { tipo: "Tierra", descripcion: "Muy fuerte y resistente." },
+      "106": { tipo: "Lucha", descripcion: "Destaca en patadas." },
+      "107": { tipo: "Lucha", descripcion: "Experto en puñetazos." },
+      "108": { tipo: "Normal", descripcion: "Usa su lengua larga para atacar." },
+      "109": { tipo: "Veneno", descripcion: "Emite gases tóxicos." },
+      "110": { tipo: "Veneno", descripcion: "Contiene gases explosivos." },
+      "111": { tipo: "Tierra / Roca", descripcion: "Embiste a gran velocidad." },
+      "112": { tipo: "Tierra / Roca", descripcion: "Su cuerno es letal." },
+      "113": { tipo: "Normal", descripcion: "Pokémon muy amable y nutritivo." },
+      "114": { tipo: "Planta", descripcion: "Se enreda para defenderse." },
+      "115": { tipo: "Normal", descripcion: "Protege a su cría." },
+      "116": { tipo: "Agua", descripcion: "Nada en aguas tranquilas." },
+      "117": { tipo: "Agua", descripcion: "Dispara tinta para escapar." },
+      "118": { tipo: "Agua", descripcion: "Nada velozmente." },
+      "119": { tipo: "Agua", descripcion: "Tiene un cuerno afilado." },
+      "120": { tipo: "Agua", descripcion: "Gira como una estrella." },
+      "121": { tipo: "Agua / Psíquico", descripcion: "Gran poder mental." },
+      "122": { tipo: "Psíquico / Hada", descripcion: "Usa gestos para comunicarse." },
+      "123": { tipo: "Bicho / Volador", descripcion: "Muy rápido y preciso." },
+      "124": { tipo: "Hielo / Psíquico", descripcion: "Se mueve con elegancia." },
+      "125": { tipo: "Eléctrico", descripcion: "Genera electricidad constantemente." },
+      "126": { tipo: "Fuego", descripcion: "Su cuerpo es muy caliente." },
+      "127": { tipo: "Bicho", descripcion: "Ataca con grandes cuernos." },
+      "128": { tipo: "Normal", descripcion: "Muy fuerte y agresivo." },
+      "129": { tipo: "Agua", descripcion: "Muy débil, solo salta." },
+      "130": { tipo: "Agua / Volador", descripcion: "Muy violento y destructivo." },
+      "131": { tipo: "Agua / Hielo", descripcion: "Amable y resistente." },
+      "132": { tipo: "Normal", descripcion: "Cambia su forma a voluntad." },
+      "133": { tipo: "Normal", descripcion: "Gran capacidad evolutiva." },
+      "134": { tipo: "Agua", descripcion: "Se adapta al agua." },
+      "135": { tipo: "Eléctrico", descripcion: "Rápido como el rayo." },
+      "136": { tipo: "Fuego", descripcion: "Su temperatura es extrema." },
+      "137": { tipo: "Normal", descripcion: "Cuerpo hecho de datos." },
+      "138": { tipo: "Roca / Agua", descripcion: "Fósil antiguo." },
+      "139": { tipo: "Roca / Agua", descripcion: "Tiene tentáculos duros." },
+      "140": { tipo: "Roca / Agua", descripcion: "Criatura prehistórica." },
+      "141": { tipo: "Roca / Agua", descripcion: "Caza con gran velocidad." },
+      "142": { tipo: "Roca / Volador", descripcion: "Vuelo poderoso." },
+      "143": { tipo: "Normal", descripcion: "Siempre duerme o come." },
+      "144": { tipo: "Hielo / Volador", descripcion: "Controla el hielo." },
+      "145": { tipo: "Eléctrico / Volador", descripcion: "Domina rayos." },
+      "146": { tipo: "Fuego / Volador", descripcion: "Arde en llamas." },
+      "147": { tipo: "Dragón", descripcion: "Muy raro." },
+      "148": { tipo: "Dragón", descripcion: "Puede volar a gran velocidad." },
+      "149": { tipo: "Dragón / Volador", descripcion: "Extremadamente poderoso." },
+      "150": { tipo: "Psíquico", descripcion: "Creado mediante ingeniería genética." },
+      "151": { tipo: "Psíquico", descripcion: "Dicen que contiene ADN de todos." }
+    };
+
+    const coloresTipo = {
+      "Fuego": "#f8b4a0",
+      "Agua": "#a0c4ff",
+      "Planta": "#b7e4c7",
+      "Eléctrico": "#fff3a0",
+      "Veneno": "#d0a2f7",
+      "Normal": "#e0e0e0",
+      "Tierra": "#e6ccb2",
+      "Roca": "#d6c6a8",
+      "Bicho": "#cde77f",
+      "Hada": "#ffd6e0",
+      "Psíquico": "#ffc6ff",
+      "Lucha": "#ffadad",
+      "Volador": "#cdb4db",
+      "Hielo": "#caf0f8",
+      "Dragón": "#a0c4ff",
+      "Fantasma": "#bdb2ff",
+      "Acero": "#d9d9d9"
+    };
+
+    function cargarGeneracion(gen, event) {
+      pokedex.innerHTML = "";
+
+      const datos = generaciones[gen];
+
+      datos.nombres.forEach((nombre, index) => {
+        const numero = (index + datos.inicio).toString().padStart(3, "0");
+        const card = document.createElement("article");
+        card.className = "pokemon";
+
+        const info = infoPokemon[numero];
+
+        if (info) {
+          const tipos = info.tipo.split(" / ");
+
+          if (tipos.length === 2) {
+            const color1 = coloresTipo[tipos[0]];
+            const color2 = coloresTipo[tipos[1]];
+
+            if (color1 && color2) {
+              card.style.background = `linear-gradient(to right, ${color1} 50%, ${color2} 50%)`;
+            }
+          } else {
+            const color = coloresTipo[tipos[0]];
+            if (color) {
+              card.style.backgroundColor = color;
+            }
+          }
+        }
+
+        card.innerHTML = `
+          <img src="imagenes/${numero}.png" alt="${nombre}">
+          <h2>${nombre}</h2>
+          <p>#${numero}</p>
+        `;
+
+//(click seguro)
+card.addEventListener("click", () => {
+  abrirModal(nombre, numero);
+});
+
+pokedex.appendChild(card);
+
+      });
+      
+      document.querySelectorAll(".menu button")
+        .forEach(btn => btn.classList.remove("activo"));
+
+      if (event) {
+        event.target.classList.add("activo");
+      }
+    }
+
+    // ✅ Cargar Gen 1 al iniciar
+    cargarGeneracion(1);
+    document.querySelector(".menu button").classList.add("activo");
+    
+    function abrirModal(nombre, numero) {
+      document.getElementById("modal").style.display = "flex";
+
+      document.getElementById("modal-img").src = `imagenes/${numero}.png`;
+      document.getElementById("modal-nombre").textContent = nombre;
+      document.getElementById("modal-numero").textContent = "#" + numero;
+
+      const info = infoPokemon[numero];
+
+      document.getElementById("modal-tipo").textContent =
+        info ? "Tipo: " + info.tipo : "Tipo: Desconocido";
+
+      document.getElementById("modal-desc").textContent =
+        info ? info.descripcion : "Sin descripción disponible";
+    }
+
+    function cerrarModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+    
+    window.onclick = function(event) {
+      const modal = document.getElementById("modal");
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    }
+    document.querySelectorAll(".tipo-box").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const tipoSeleccionado = btn.dataset.tipo;
+
+        // activar botón
+        document.querySelectorAll(".tipo-box")
+          .forEach(b => b.classList.remove("activo"));
+
+        btn.classList.add("activo");
+
+        document.querySelectorAll(".pokemon").forEach(card => {
+          const numero = card.querySelector("p").textContent.replace("#", "");
+          const info = infoPokemon[numero];
+
+          if (tipoSeleccionado === "todos") {
+            card.style.display = "block";
+            return;
+          }
+
+          if (info && info.tipo.includes(tipoSeleccionado)) {
+            card.style.display = "block";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
