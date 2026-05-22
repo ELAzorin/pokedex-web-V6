@@ -11,12 +11,20 @@ h1 {
   color: #ff0000;
 }
 
-/* HEADER / MENÚ */
+/* =============================== */
+/* HEADER / MENÚ DE GENERACIONES */
+/* =============================== */
+
+nav {
+  text-align: center;
+}
 
 .menu {
   list-style: none;
+
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 10px;
 
   padding: 12px 20px;
@@ -25,28 +33,33 @@ h1 {
 
   border-radius: 30px;
 
-  /* 🔥 Fondo estilo Pokémon */
   background: linear-gradient(
     180deg,
     rgba(20, 20, 20, 0.85),
     rgba(0, 0, 0, 0.6)
   );
 
-  /* 🔥 Efecto cristal */
   backdrop-filter: blur(10px);
 
-  /* 🔥 Borde pro */
   border: 2px solid rgba(255, 255, 255, 0.15);
 
-  /* 🔥 Sombra profunda */
   box-shadow:
     0 8px 25px rgba(0, 0, 0, 0.6),
     inset 0 1px 4px rgba(255, 255, 255, 0.1);
 }
 
+.menu:hover {
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.7),
+    inset 0 2px 6px rgba(255, 255, 255, 0.15);
+}
+
+.menu li {
+  list-style: none;
+}
+
 .menu button {
   padding: 10px 16px;
-  border: none;
 
   background: linear-gradient(180deg, #ff3c1a, #c6280a);
   color: white;
@@ -55,24 +68,28 @@ h1 {
   font-weight: bold;
   cursor: pointer;
 
-  border: 2px solid rgba(255,255,255,0.2);
+  border: 2px solid rgba(255, 255, 255, 0.2);
 
-  transition: all 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
 }
 
 .menu button:hover {
   transform: scale(1.08);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
 }
 
 .menu button.activo {
   background: black;
   border: 2px solid #1e90ff;
-
-  box-shadow: 0 0 10px rgba(30,144,255,0.6);
+  box-shadow: 0 0 10px rgba(30, 144, 255, 0.6);
 }
 
+/* =============================== */
 /* BUSCADOR */
+/* =============================== */
 
 .buscador-container {
   display: flex;
@@ -94,7 +111,9 @@ h1 {
   border-color: #888;
 }
 
+/* =============================== */
 /* CONTADOR */
+/* =============================== */
 
 .contador-container {
   display: flex;
@@ -118,6 +137,10 @@ h1 {
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
 }
 
+/* =============================== */
+/* BOTÓN POKÉMON ALEATORIO */
+/* =============================== */
+
 .boton-random {
   min-width: 170px;
   padding: 10px 22px;
@@ -131,6 +154,11 @@ h1 {
   color: white;
 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
 }
 
 .boton-random:hover {
@@ -143,8 +171,9 @@ h1 {
   transform: scale(0.95);
 }
 
-
+/* =============================== */
 /* BOTÓN MOSTRAR TODOS */
+/* =============================== */
 
 .boton-todos {
   min-width: 150px;
@@ -152,14 +181,21 @@ h1 {
   border-radius: 25px;
   font-size: 15px;
   background: #222;
-  color: white;
+  color: white !important;
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .boton-todos:hover {
   transform: scale(1.05);
 }
 
+/* =============================== */
 /* LEYENDA DE TIPOS */
+/* =============================== */
 
 .leyenda {
   display: grid;
@@ -183,13 +219,30 @@ h1 {
   font-size: 14px;
   font-weight: bold;
   color: #222;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.tipo-box:hover {
+  transform: scale(1.08);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
 }
 
 .tipo-box.activo {
   outline: 3px solid black;
 }
 
+.tipo-box:active,
+.menu button:active,
+.boton-todos:active {
+  transform: scale(0.95);
+}
+
+/* =============================== */
 /* COLORES DE TIPOS */
+/* =============================== */
 
 [data-tipo="Fuego"] {
   background: #f8b4a0;
@@ -264,7 +317,9 @@ h1 {
   color: white;
 }
 
+/* =============================== */
 /* GRID DE LA POKÉDEX */
+/* =============================== */
 
 .pokedex {
   display: grid;
@@ -276,8 +331,9 @@ h1 {
   overflow: visible;
 }
 
-/* ANIMACIÓN AL CAMBIAR ENTRE GENERACIONES */
-/* Compatible con JS que use pokedex-salida / pokedex-entrada */
+/* =============================== */
+/* ANIMACIÓN AL CAMBIAR GENERACIÓN */
+/* =============================== */
 
 .pokedex-salida {
   opacity: 0;
@@ -291,8 +347,6 @@ h1 {
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-/* Compatible también con JS que use fade-out / fade-in */
-
 .fade-out {
   opacity: 0;
   transform: translateY(20px) scale(0.98);
@@ -305,7 +359,9 @@ h1 {
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-/* TARJETA DE CADA POKÉMON */
+/* =============================== */
+/* TARJETAS POKÉMON */
+/* =============================== */
 
 .pokemon {
   background: white;
@@ -325,7 +381,6 @@ h1 {
     filter 0.25s ease;
 }
 
-/* Entrada individual de cada carta */
 @keyframes aparecerCarta {
   from {
     opacity: 0;
@@ -338,7 +393,6 @@ h1 {
   }
 }
 
-/* Hover de carta */
 .pokemon:hover {
   transform: translateY(-10px) scale(1.08);
   box-shadow: 0 16px 30px rgba(0, 0, 0, 0.35);
@@ -346,12 +400,9 @@ h1 {
   z-index: 10;
 }
 
-/* Click de carta */
 .pokemon:active {
   transform: translateY(-4px) scale(0.97);
 }
-
-/* Imagen Pokémon */
 
 .pokemon img {
   width: 100%;
@@ -364,15 +415,11 @@ h1 {
   transform: scale(1.12) rotate(-3deg);
 }
 
-/* Nombre */
-
 .pokemon h2 {
   color: black;
   font-size: 16px;
   margin: 10px 0 5px;
 }
-
-/* Número */
 
 .pokemon p {
   margin: 0;
@@ -380,13 +427,16 @@ h1 {
   font-size: 14px;
 }
 
-/* MODAL - FONDO OSCURO */
+/* =============================== */
+/* MODAL */
+/* =============================== */
 
 .modal {
   display: none;
   position: fixed;
   top: 0;
   left: 0;
+
   width: 100%;
   height: 100%;
 
@@ -398,9 +448,9 @@ h1 {
   z-index: 9999;
 }
 
-/* MODAL - CAJA INTERIOR */
-
 .modal-content {
+  position: relative;
+
   background: white;
   color: #000000;
   padding: 25px;
@@ -431,14 +481,27 @@ h1 {
   }
 }
 
-/* Botón cerrar */
+/* X cerrar */
 
 .cerrar {
   position: absolute;
   top: 10px;
-  right: 20px;
-  font-size: 25px;
+  right: 15px;
+
+  font-size: 26px;
   cursor: pointer;
+  z-index: 20;
+
+  color: inherit;
+
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
+}
+
+.cerrar:hover {
+  transform: scale(1.2);
+  color: red;
 }
 
 /* Imagen del modal */
@@ -467,26 +530,56 @@ h1 {
   }
 }
 
+/* Flechas modal */
 
-/* BOTONES GENERALES */
+.flecha {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 
-button {
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  font-size: 40px;
+  font-weight: bold;
+
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+
+  border: none;
+  border-radius: 50%;
+
+  width: 50px;
+  height: 50px;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 10;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-button:hover {
-  transform: scale(1.08);
-  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+.flecha-izq {
+  left: 10px;
 }
 
-.tipo-box:active,
-.menu button:active,
-.boton-todos:active {
-  transform: scale(0.95);
+.flecha-der {
+  right: 10px;
 }
 
+.flecha:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.35);
+}
+
+/* =============================== */
 /* ANIMACIÓN CORTINA OPCIONAL */
-/* Solo se usa si en JS añades la clase .cortina */
+/* =============================== */
 
 .pokedex.cortina {
   animation: cortina 0.5s ease;
@@ -506,9 +599,40 @@ button:hover {
   }
 }
 
-/* MÓVIL */
+/* =============================== */
+/* RESPONSIVE MÓVIL */
+/* =============================== */
 
 @media (max-width: 768px) {
+  /* Menú generaciones 3x3 */
+  .menu {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+
+    gap: 10px;
+
+    width: 92vw;
+    max-width: 360px;
+
+    padding: 12px;
+    margin: 12px auto;
+
+    box-sizing: border-box;
+  }
+
+  .menu li {
+    width: 100%;
+  }
+
+  .menu button {
+    width: 100%;
+    padding: 12px 6px;
+    font-size: 15px;
+    border-radius: 15px;
+    text-align: center;
+  }
+
+  /* Tipos */
   .leyenda {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -523,6 +647,7 @@ button:hover {
     border-radius: 15px;
   }
 
+  /* Cards */
   .pokedex {
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
@@ -545,17 +670,20 @@ button:hover {
     font-size: 12px;
   }
 
+  /* Buscador */
   #buscador {
     width: 100%;
     font-size: 14px;
   }
 
+  /* Contador y botones */
   .contador-container {
     flex-direction: column;
     gap: 8px;
   }
 
-  .boton-todos {
+  .boton-todos,
+  .boton-random {
     width: 80%;
     max-width: 260px;
   }
@@ -564,9 +692,36 @@ button:hover {
     font-size: 13px;
     padding: 6px 12px;
   }
+
+  /* Modal */
+  .modal-content {
+    width: 85%;
+    padding: 20px;
+  }
+
+  .modal img {
+    width: 220px;
+    height: 220px;
+  }
+
+  .flecha {
+    width: 42px;
+    height: 42px;
+    font-size: 32px;
+  }
+
+  .flecha-izq {
+    left: 6px;
+  }
+
+  .flecha-der {
+    right: 6px;
+  }
 }
 
-/* Evita hover raro en pantallas táctiles */
+/* =============================== */
+/* EVITAR HOVER RARO EN TÁCTIL */
+/* =============================== */
 
 @media (hover: none) {
   .pokemon:hover {
@@ -581,131 +736,9 @@ button:hover {
 
   .tipo-box:hover,
   .menu button:hover,
-  .boton-todos:hover {
+  .boton-todos:hover,
+  .boton-random:hover {
     transform: none;
     box-shadow: none;
-  }
-}
-
-.cerrar {
-  color: inherit;
-}
-
-.boton-todos,
-.boton-todos.activo,
-button.boton-todos,
-button.boton-todos.activo {
-  color: white !important;
-}
-
-.boton-random,
-.boton-random:hover,
-.boton-random:active {
-  color: white;
-}
-
-@media (max-width: 768px) {
-  .modal-content {
-    width: 85%;
-    padding: 20px;
-  }
-
-  .modal img {
-    width: 220px;
-    height: 220px;
-  }
-}
-
-/* 🔥 MODAL ajustes PC */
-
-.modal-content {
-  position: relative; /* ✅ necesario para posicionar flechas y X */
-}
-
-/* ✅ X cerrar */
-
-.cerrar {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 26px;
-  cursor: pointer;
-  z-index: 20; /* por encima de todo */
-
-  transition: transform 0.2s ease;
-}
-
-.cerrar:hover {
-  transform: scale(1.2);
-  color: red;
-}
-
-/* ✅ Flechas */
-
-.flecha {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-
-  font-size: 40px;
-  font-weight: bold;
-
-  background: rgba(0,0,0,0.5);
-  color: white;
-
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-
-  cursor: pointer;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  z-index: 10;
-}
-
-.flecha-izq {
-  left: 10px;
-}
-
-.flecha-der {
-  right: 10px;
-}
-
-.flecha:hover {
-  background: rgba(0,0,0,0.8);
-  transform: translateY(-50%) scale(1.1);
-}
-
-.menu:hover {
-  box-shadow:
-    0 10px 30px rgba(0,0,0,0.7),
-    inset 0 2px 6px rgba(255,255,255,0.15);
-}
-
-@media (max-width: 768px) {
-  .menu {
-    display: grid !important; /* 🔥 fuerza el grid */
-    grid-template-columns: repeat(3, 1fr) !important;
-    
-    gap: 10px;
-    max-width: 360px;
-    margin: 10px auto;
-    padding: 10px 15px;
-  }
-
-  .menu li {
-    width: 100%;
-    list-style: none;
-  }
-
-  .menu button {
-    width: 100%;
-    padding: 12px;
-    font-size: 15px;
-    border-radius: 15px;
   }
 }
