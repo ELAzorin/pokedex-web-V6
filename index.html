@@ -13,10 +13,10 @@
 
       <span class="cerrar">✖</span>
 
-      <!-- Flecha izquierda -->
+      <!-- 🔥 Flecha izquierda -->
       <button id="prev-pokemon" class="flecha flecha-izq">⟨</button>
 
-      <!-- Flecha derecha -->
+      <!-- 🔥 Flecha derecha -->
       <button id="next-pokemon" class="flecha flecha-der">⟩</button>
 
       <img id="modal-img">
@@ -27,7 +27,6 @@
 
     </div>
   </div>
-
 
   <!-- HEADER -->
   <header>
@@ -63,6 +62,11 @@
     <button id="btn-random" class="boton-random">
       Pokémon aleatorio
     </button>
+    
+    <button id="btn-champions" class="boton-champions">
+      Champions
+    </button>
+
   </div>
 
   <div class="leyenda">
@@ -1627,6 +1631,108 @@
       contador.textContent = mensaje;
     }
 
+    function buscarPokemonPorNombre(nombreBuscado) {
+  for (const gen in generaciones) {
+    const datos = generaciones[gen];
+
+    const index = datos.nombres.findIndex(nombre =>
+      nombre.toLowerCase() === nombreBuscado.toLowerCase()
+    );
+
+    if (index !== -1) {
+      const numero = (index + datos.inicio).toString().padStart(3, "0");
+
+      return {
+        nombre: datos.nombres[index],
+        numero: numero
+      };
+    }
+  }
+
+  return null;
+}
+
+function pintarCardPokemon(nombre, numero, index) {
+  const card = document.createElement("article");
+  card.className = "pokemon";
+  card.dataset.numero = numero;
+  card.style.animationDelay = `${index * 0.018}s`;
+
+  const info = infoPokemon[numero];
+
+  if (info) {
+    const tipos = info.tipo.split(" / ");
+
+    if (tipos.length === 2) {
+      const color1 = coloresTipo[tipos[0]];
+      const color2 = coloresTipo[tipos[1]];
+
+      if (color1 && color2) {
+        card.style.background = `linear-gradient(to right, ${color1} 50%, ${color2} 50%)`;
+      }
+    } else {
+      const color = coloresTipo[tipos[0]];
+
+      if (color) {
+        card.style.backgroundColor = color;
+      }
+    }
+  }
+
+  card.innerHTML = `
+    <img src="imagenes/${numero}.png" alt="${nombre}">
+    <h2>${nombre}</h2>
+    <p>#${numero}</p>
+  `;
+
+  card.addEventListener("click", () => {
+    abrirModal(nombre, numero);
+  });
+
+  pokedex.appendChild(card);
+}
+
+    function cargarChampions() {
+      pokedex.innerHTML = "";
+
+      buscador.value = "";
+
+      document.querySelectorAll(".menu button")
+        .forEach(btn => btn.classList.remove("activo"));
+
+      document.querySelectorAll(".tipo-box")
+        .forEach(btn => btn.classList.remove("activo"));
+
+      document.querySelector('[data-tipo="todos"]').classList.add("activo");
+
+      const btnChampions = document.getElementById("btn-champions");
+      if (btnChampions) {
+        btnChampions.classList.add("activo");
+      }
+
+      let encontrados = 0;
+      let noEncontrados = [];
+
+      pokemonChampions.forEach((nombreChampions) => {
+        const pokemon = buscarPokemonPorNombre(nombreChampions);
+
+        if (pokemon) {
+          pintarCardPokemon(pokemon.nombre, pokemon.numero, encontrados);
+          encontrados++;
+        } else {
+          noEncontrados.push(nombreChampions);
+        }
+      });
+
+      filtrar();
+
+      if (noEncontrados.length > 0) {
+        console.warn("No encontrados en tus generaciones:", noEncontrados);
+      }
+
+      contador.textContent = `Mostrando ${encontrados} Pokémon de Champions`;
+    }
+
     function abrirModal(nombre, numero) {
       
       // Guardar los Pokémon visibles
@@ -1783,6 +1889,10 @@
     document.querySelector(".cerrar").addEventListener("click", (e) => {
       e.stopPropagation();
       cerrarModal();
+    });
+
+    document.getElementById("btn-champions").addEventListener("click", () => {
+      cargarChampions();
     });
 
     cargarGeneracion(1);
