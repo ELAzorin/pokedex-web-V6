@@ -845,3 +845,44 @@ nav {
     max-width: 260px;
   }
 }
+
+.btn-shiny {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+
+  width: 40px;
+  height: 40px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: gold;
+  color: black;
+
+  font-size: 20px;
+  cursor: pointer;
+
+  z-index: 20;
+
+  transition: 0.2s;
+}
+
+.btn-shiny:hover {
+  transform: scale(1.15);
+}
+
+.btn-shiny.activo {
+  background: black;
+  color: gold;
+  box-shadow: 0 0 12px gold;
+}
+
+.btn-shiny.activo {
+  animation: brillo 1s infinite alternate;
+}
+
+@keyframes brillo {
+  from { box-shadow: 0 0 5px gold; }
+  to { box-shadow: 0 0 15px gold; }
+}
