@@ -12,6 +12,7 @@
     <div class="modal-content">
 
       <span class="cerrar">✖</span>
+      <button id="btn-shiny" class="btn-shiny">✨</button>
 
       <!-- 🔥 Flecha izquierda -->
       <button id="prev-pokemon" class="flecha flecha-izq">⟨</button>
@@ -105,6 +106,7 @@
   <script>
     let listaActual = [];
     let indiceActual = 0;
+    let esShinyActivo = false;
     const pokedex = document.getElementById("pokedex");
     const buscador = document.getElementById("buscador");
     const contador = document.getElementById("contador");
@@ -1753,6 +1755,27 @@ function pintarCardPokemon(nombre, numero, index) {
       modal.style.display = "flex";
 
       document.getElementById("modal-img").src = `imagenes/${numero}.png`;
+      // Resetear estado shiny al abrir
+      esShinyActivo = false;
+
+      const img = document.getElementById("modal-img");
+      const btnShiny = document.getElementById("btn-shiny");
+
+      btnShiny.classList.remove("activo");
+
+      // Evento botón shiny
+      btnShiny.onclick = () => {
+        esShinyActivo = !esShinyActivo;
+
+        if (esShinyActivo) {
+          img.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/${parseInt(numero)}.png`;
+          btnShiny.classList.add("activo");
+        } else {
+          img.src = `imagenes/${numero}.png`;
+          btnShiny.classList.remove("activo");
+        }
+      };
+
       document.getElementById("modal-nombre").textContent = nombre;
       document.getElementById("modal-numero").textContent = "#" + numero;
 
