@@ -591,6 +591,7 @@ button.boton-todos.activo {
 
   .menu li {
     width: 100%;
+    display: contents;
   }
 
   .menu button {
