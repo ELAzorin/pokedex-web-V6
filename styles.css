@@ -685,3 +685,27 @@ button.boton-todos.activo {
     0 10px 30px rgba(0,0,0,0.7),
     inset 0 2px 6px rgba(255,255,255,0.15);
 }
+
+@media (max-width: 768px) {
+  .menu {
+    display: grid !important; /* 🔥 fuerza el grid */
+    grid-template-columns: repeat(3, 1fr) !important;
+    
+    gap: 10px;
+    max-width: 360px;
+    margin: 10px auto;
+    padding: 10px 15px;
+  }
+
+  .menu li {
+    width: 100%;
+    list-style: none;
+  }
+
+  .menu button {
+    width: 100%;
+    padding: 12px;
+    font-size: 15px;
+    border-radius: 15px;
+  }
+}
