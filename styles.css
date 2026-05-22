@@ -18,25 +18,58 @@ h1 {
   display: flex;
   justify-content: center;
   gap: 10px;
-  padding: 0;
+
+  padding: 12px 20px;
+  margin: 15px auto;
+  width: fit-content;
+
+  border-radius: 30px;
+
+  /* 🔥 Fondo estilo Pokémon */
+  background: linear-gradient(
+    180deg,
+    rgba(20, 20, 20, 0.85),
+    rgba(0, 0, 0, 0.6)
+  );
+
+  /* 🔥 Efecto cristal */
+  backdrop-filter: blur(10px);
+
+  /* 🔥 Borde pro */
+  border: 2px solid rgba(255, 255, 255, 0.15);
+
+  /* 🔥 Sombra profunda */
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.6),
+    inset 0 1px 4px rgba(255, 255, 255, 0.1);
 }
 
 .menu button {
-  padding: 8px 15px;
+  padding: 10px 16px;
   border: none;
-  background-color: #e3350d;
+
+  background: linear-gradient(180deg, #ff3c1a, #c6280a);
   color: white;
-  border-radius: 10px;
-  cursor: pointer;
+
+  border-radius: 12px;
   font-weight: bold;
+  cursor: pointer;
+
+  border: 2px solid rgba(255,255,255,0.2);
+
+  transition: all 0.2s ease;
 }
 
 .menu button:hover {
-  background-color: #b82a0a;
+  transform: scale(1.08);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.4);
 }
 
 .menu button.activo {
-  background-color: black;
+  background: black;
+  border: 2px solid #1e90ff;
+
+  box-shadow: 0 0 10px rgba(30,144,255,0.6);
 }
 
 /* BUSCADOR */
@@ -645,4 +678,10 @@ button.boton-todos.activo {
 .flecha:hover {
   background: rgba(0,0,0,0.8);
   transform: translateY(-50%) scale(1.1);
+}
+
+.menu:hover {
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.7),
+    inset 0 2px 6px rgba(255,255,255,0.15);
 }
